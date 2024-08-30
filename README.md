@@ -50,3 +50,7 @@ Dev dependencies install command:
 Shadcn components add command:
 
 `npx --legacy-peer-deps shadcn-ui@latest add button dialog dropdown-menu form input label skeleton tabs textarea toast tooltip`
+
+### Authentication
+
+[Lucia](lucia-auth.com)
