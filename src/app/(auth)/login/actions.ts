@@ -1,5 +1,5 @@
 // Server Actions for Login
-"user server";
+"use server";
 
 import prisma from "@/lib/prisma";
 import { loginSchema, LoginValues } from "@/lib/validation";
