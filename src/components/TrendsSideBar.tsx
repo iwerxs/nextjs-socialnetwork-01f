@@ -10,6 +10,7 @@ import UserAvatar from "./UserAvatar";
 import { Button } from "./ui/button";
 import { unstable_cache } from "next/cache";
 import { title } from "process";
+import { formatNumber } from "@/lib/utils";
 // import { setTimeout } from "timers/promises";
 
 export default function TrendsSideBar() {
@@ -105,6 +106,10 @@ async function TrendingTopics() {
                   title={hashtag}
                 >
                   {hashtag}
+                </p>
+                <p className="text-sm text-muted-foreground">
+                  {formatNumber(count)}
+                  {count === 1 ? "post" : "posts"}
                 </p>
               </Link>
             </>
