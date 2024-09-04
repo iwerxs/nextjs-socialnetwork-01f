@@ -1,10 +1,11 @@
+//src/components/UserAvatar.tsx
+
 import Image from "next/image";
 import avatarPlaceholder from "@/assets/avatar-placeholder.png";
 import { cn } from "@/lib/utils";
 
-//src/components/UserButton.tsx
 interface UserAvatarProps {
-  avatarUrl: string | null | undefined;
+  avatarUrl?: string | null | undefined;
   size?: number;
   className?: string;
 }
