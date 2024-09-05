@@ -54,3 +54,7 @@ Shadcn components add command:
 ### Authentication
 
 [Lucia](lucia-auth.com)
+
+### TanStack Query
+
+[TanStack](https://tanstack.com/query/latest)
