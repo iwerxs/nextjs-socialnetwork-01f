@@ -58,3 +58,7 @@ Shadcn components add command:
 ### TanStack Query
 
 [TanStack](https://tanstack.com/query/latest)
+
+### KY Fetch Wrapper
+
+[KY](https://github.com/sindresorhus/ky)
