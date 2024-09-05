@@ -3,21 +3,25 @@ import Post from "@/components/posts/Post";
 import TrendsSideBar from "@/components/TrendsSideBar";
 import prisma from "@/lib/prisma";
 import { postDataInclude } from "@/lib/types";
+import ForYouFeed from "./ForYouFeed";
 
-export default async function Home() {
-  const posts = await prisma.post.findMany({
-    include: postDataInclude,
-    orderBy: { createdAt: "desc" },
-  });
+export default function Home() {
+  // const posts = await prisma.post.findMany({
+  //   include: postDataInclude,
+  //   orderBy: { createdAt: "desc" },
+  // });
 
   return (
     <>
       <main className="w-full min-w-0 gap-5">
         <div className="w-full min-w-0 space-y-5">
           <PostEditor />
-          {posts.map((post) => (
+          {/* this is still a server component, but fetch doesn't occur here. */}
+          {/* {posts.map((post) => (
             <Post key={post.id} post={post} />
-          ))}
+          ))} */}
+          <ForYouFeed />
+          {/* fetches the data internally from the client side*/}
         </div>
         <TrendsSideBar />
       </main>
