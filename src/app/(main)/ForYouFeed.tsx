@@ -72,6 +72,7 @@ export default function ForYouFeed() {
         {posts.map((post) => (
           <Post key={post.id} post={post} />
         ))}
+        {/* loading state */}
         {isFetchingNextPage && (
           <Loader2 className="mx-auto my-3 animate-spin" />
         )}
