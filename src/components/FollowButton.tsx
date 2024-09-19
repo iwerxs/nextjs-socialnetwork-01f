@@ -23,6 +23,8 @@ export default function FollowButton({
 
   const { data } = useFollowerInfo(userId, initialState);
 
+  const queryKey: QueryKey = ["follower-info, userId"];
+
   // call Post endpoint or Delete endpoint
   const { mutate } = useMutation({
     mutationFn: () =>
@@ -30,8 +32,6 @@ export default function FollowButton({
         ? kyInstance.delete(`/api/users/${userId}/followers`)
         : kyInstance.post(`/api/users/${userId}/followers`),
     onMutate: async () => {
-      const queryKey: QueryKey = ["follower-info, userId"];
-
       await queryClient.cancelQueries({ queryKey });
 
       const previousState = queryClient.getQueryData<FollowerInfo>(queryKey);
@@ -40,8 +40,12 @@ export default function FollowButton({
         followers:
           (previousState?.followers || 0) +
           (previousState?.isFollowedByUser ? -1 : 1),
-        isFollowedByUser: false,
+        isFollowedByUser: !previousState?.isFollowedByUser,
       }));
+      return { previousState };
+    },
+    onError(error, variables, context) {
+      queryClient.setQueryData(queryKey, context?.previousState);
     },
   });
 
