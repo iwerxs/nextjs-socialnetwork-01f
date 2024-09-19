@@ -46,6 +46,11 @@ export default function FollowButton({
     },
     onError(error, variables, context) {
       queryClient.setQueryData(queryKey, context?.previousState);
+      console.error(error);
+      toast({
+        variant: "destructive",
+        description: "Something Went Wrong. Try Again",
+      });
     },
   });
 
