@@ -1,4 +1,4 @@
-//src components/post/mutations.ts
+//src/components/post/mutations.ts
 
 import { PostData, PostsPage } from "@/lib/types";
 import { useToast } from "../ui/use-toast";
@@ -20,7 +20,7 @@ export function useDeletePostMutation() {
 
   const mutation = useMutation({
     mutationFn: deletePost,
-    onSuccess: async (deletePost) => {
+    onSuccess: async (deletedPost) => {
       const queryFilter: QueryFilters = { queryKey: ["post-feed"] };
 
       await queryClient.cancelQueries(queryFilter);
@@ -32,7 +32,8 @@ export function useDeletePostMutation() {
           return {
             pageParams: oldData.pageParams,
             pages: oldData.pages.map((page) => ({
-              posts: page.posts.filter((p) => p.id !== deletePost.id),
+              nextCursor: page.nextCursor,
+              posts: page.posts.filter((p) => p.id !== deletedPost.id),
             })),
           };
         },
@@ -40,8 +41,8 @@ export function useDeletePostMutation() {
       toast({
         description: "Post deleted",
       });
-      if (pathname === `/posts/${deletePost.id}`) {
-        router.push(`/users/${deletePost.user.username}`);
+      if (pathname === `/posts/${deletedPost.id}`) {
+        router.push(`/users/${deletedPost.user.username}`);
       }
     },
     onError(error) {

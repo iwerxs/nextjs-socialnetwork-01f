@@ -4,7 +4,8 @@
 
 import { validateRequest } from "@/auth";
 import prisma from "@/lib/prisma";
-import { postDataInclude } from "@/lib/types";
+import { getPostDataInclude } from "@/lib/types";
+// import { postDataInclude } from "@/lib/types";
 
 export async function deletePost(id: string) {
   //auth user
@@ -17,12 +18,12 @@ export async function deletePost(id: string) {
   });
 
   if (!post) throw new Error("post Not found");
-  // chk if post is from actual auth user
+  // chk if post is from actual auth user with userId
   if (post.userId !== user.id) throw new Error("unAuthorzied");
 
   const deletePost = await prisma.post.delete({
     where: { id },
-    include: postDataInclude,
+    include: getPostDataInclude(user.id),
   });
   return deletePost;
 }

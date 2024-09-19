@@ -39,7 +39,7 @@ export default function DeletePostDialog({
           <DialogHeader>
             <DialogTitle>Delete Post?</DialogTitle>
             <DialogDescription>
-              Are you sure, delete action is permanent
+              Are you sure? delete action is permanent
             </DialogDescription>
           </DialogHeader>
           <DialogFooter>
