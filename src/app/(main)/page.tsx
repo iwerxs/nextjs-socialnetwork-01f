@@ -2,8 +2,10 @@ import PostEditor from "@/components/posts/editor/PostEditor";
 import Post from "@/components/posts/Post";
 import TrendsSideBar from "@/components/TrendsSideBar";
 import prisma from "@/lib/prisma";
-import { postDataInclude } from "@/lib/types";
+// import { postDataInclude } from "@/lib/types";
 import ForYouFeed from "./ForYouFeed";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import FollowingFeed from "./FollowingFeed";
 
 export default function Home() {
   // const posts = await prisma.post.findMany({
@@ -20,7 +22,18 @@ export default function Home() {
           {/* {posts.map((post) => (
             <Post key={post.id} post={post} />
           ))} */}
-          <ForYouFeed />
+          <Tabs defaultValue="for-you">
+            <TabsList>
+              <TabsTrigger value="for-you">For You</TabsTrigger>
+              <TabsTrigger value="following">Following</TabsTrigger>
+            </TabsList>
+            <TabsContent value="for-you">
+              <ForYouFeed />
+            </TabsContent>
+            <TabsContent value="following">
+              <FollowingFeed />
+            </TabsContent>
+          </Tabs>
           {/* fetches the data internally from the client side*/}
         </div>
         <TrendsSideBar />
