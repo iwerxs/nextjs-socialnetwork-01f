@@ -22,7 +22,7 @@ export function useSubmitPostMutation() {
       const queryFilter: QueryFilters = { queryKey: ["post-feed", "for-you"] };
 
       await queryClient.cancelQueries(queryFilter);
-
+      // modify multiple feeds on all papers
       queryClient.setQueriesData<InfiniteData<PostsPage, string | null>>(
         queryFilter,
         (oldData) => {
