@@ -12,7 +12,7 @@ export async function GET(
   try {
     const { user: loggedInUser } = await validateRequest();
     if (!loggedInUser) {
-      return Response.json({ error: "unathorized" }, { status: 401 });
+      return Response.json({ error: "unAthorizeD" }, { status: 401 });
     }
 
     const user = await prisma.user.findUnique({
@@ -33,7 +33,7 @@ export async function GET(
         },
       },
     });
-
+    // chk if user exists
     if (!user) {
       return Response.json({ error: "user not found" }, { status: 404 });
     }
@@ -56,7 +56,7 @@ export async function POST(
   try {
     const { user: loggedInUser } = await validateRequest();
     if (!loggedInUser) {
-      return Response.json({ error: "unathorized" }, { status: 401 });
+      return Response.json({ error: "UnathorizeD" }, { status: 401 });
     }
     await prisma.follow.upsert({
       where: {
@@ -80,13 +80,22 @@ export async function POST(
 
 export async function DELETE(
   req: Request,
-  { params }: { params: { userId: string } },
+  // { params }: { params: { userId: string } },
+  { userId }: { userId: string },
 ) {
   try {
     const { user: loggedInUser } = await validateRequest();
     if (!loggedInUser) {
-      return Response.json({ error: "unathorized" }, { status: 401 });
+      return Response.json({ error: "unaThorized" }, { status: 401 });
     }
+
+    await prisma.follow.deleteMany({
+      where: {
+        followerId: loggedInUser.id,
+        followingId: userId,
+      },
+    });
+    return new Response();
   } catch (error) {
     console.error(error);
     return Response.json({ error: "Int Srv Err" }, { status: 500 });
