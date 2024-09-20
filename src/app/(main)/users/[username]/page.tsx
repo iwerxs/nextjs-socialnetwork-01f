@@ -1,8 +1,12 @@
 //src/app/(main)/users/[username]/page.tsx
 
 import { validateRequest } from "@/auth";
+import FollowButton from "@/components/FollowButton";
+import FollowerCount from "@/components/FollowerCount";
 import TrendsSideBar from "@/components/TrendsSideBar";
+import { Button } from "@/components/ui/button";
 import UserAvatar from "@/components/UserAvatar";
+import useFollowerInfo from "@/hooks/useFollowerInfo";
 import prisma from "@/lib/prisma";
 import { FollowerInfo, getUserDataSelect, UserData } from "@/lib/types";
 import { formatNumber } from "@/lib/utils";
@@ -109,8 +113,14 @@ async function UserProfile({ user, loggedInUserId }: UserProfileProps) {
                   {formatNumber(user._count.posts)}
                 </span>
               </span>
+              <FollowerCount userId={user.id} initialState={followerInfo} />
             </div>
           </div>
+          {user.id === loggedInUserId ? (
+            <Button>Edit Prof</Button>
+          ) : (
+            <FollowButton userId={user.id} initialState={followerInfo} />
+          )}
         </div>
       </div>
     </>
