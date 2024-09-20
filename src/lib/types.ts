@@ -6,6 +6,7 @@ export function getUserDataSelect(loggedInUserId: string) {
   return {
     id: true,
     displayName: true,
+    username: true,
     avatarUrl: true,
     bio: true,
     createdAt: true,
@@ -19,6 +20,7 @@ export function getUserDataSelect(loggedInUserId: string) {
     },
     _count: {
       select: {
+        posts: true,
         followers: true,
       },
     },
