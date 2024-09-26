@@ -2,6 +2,8 @@
 
 import { z } from "zod";
 
+const requiredString = z.string().trim().min(1, "Required");
+
 export const signUpSchema = z.object({
   email: z.string().trim().min(1, "Required").email("Invalid email"),
   username: z
@@ -22,13 +24,22 @@ export const signUpSchema = z.object({
 export type SignUpValues = z.infer<typeof signUpSchema>;
 
 export const loginSchema = z.object({
-  username: z.string().trim().min(1, "Required"),
-  password: z.string().trim().min(1, "Required"),
+  username: requiredString,
+  password: requiredString,
+  // username: z.string().trim().min(1, "Required"),
+  // password: z.string().trim().min(1, "Required"),
 });
 
 export type LoginValues = z.infer<typeof loginSchema>;
 
 export const createPostSchema = z.object({
-  // content: requiredString,
-  content: z.string().nonempty({ message: "Required" }),
+  content: requiredString,
+  // content: z.string().nonempty({ message: "Required" }),
 });
+
+export const updateUserProfileSchema = z.object({
+  displayName: requiredString,
+  bio: z.string().max(1000, "Max 1000 characters"),
+});
+
+export type UpdateUserProfileValues = z.infer<typeof updateUserProfileSchema>;
