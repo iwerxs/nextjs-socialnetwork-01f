@@ -1,5 +1,5 @@
 //src/app/api/users/username/[username]/route.ts
-//api client side fetching and caching via react query using the GET handler route
+//api client side fetching and caching via react query using the GET handler route endpoint
 
 import { validateRequest } from "@/auth";
 import prisma from "@/lib/prisma";
